@@ -1,0 +1,13 @@
+# ==================================== #
+# BedwarsRandomJoin configuration file #
+# ==================================== #
+
+messreloadnow: "&bBedwarsRandomJoin &7>> &eReloading configuration file"
+messreloadsucc: "&bBedwarsRandomJoin &7>> &aSuccessfully reloaded configuration file"
+
+gameCanJoinItemType: "EMERALD_BLOCK"
+gameRuningItemType: "HAY_BLOCK"
+gameFullItemType: "REDSTONE_BLOCK"
+gameStopItemType: "REDSTONE_BLOCK"
+menuTitle: "Select Game"
+menuRow: 6

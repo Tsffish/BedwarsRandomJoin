@@ -1,0 +1,19 @@
+name: BedwarsRandomJoin
+version: 1.0
+main: github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin
+author: tsffish
+depend:
+  - BedwarsRel
+commands:
+  bwrj:
+    description: Hello Command
+    usage: /bwrj
+  bwrj open:
+    description: Open Command
+    usage: /bwrj open
+  bwrj join:
+    description: Join Command
+    usage: /bwrj join
+  bwrj reload:
+    description: Reload Command
+    usage: /bwrj reload
