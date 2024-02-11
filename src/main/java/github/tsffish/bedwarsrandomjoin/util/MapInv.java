@@ -1,5 +1,6 @@
 package github.tsffish.bedwarsrandomjoin.util;
 
+import github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -9,26 +10,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin.plugin;
 import static github.tsffish.bedwarsrandomjoin.config.main.MainConfigHandler.*;
 
 public class MapInv {
+    private static final Plugin plugin = JavaPlugin.getPlugin(BedwarsRandomJoin.class);
     private static Inventory mapInv;
     private static Set<String> addedGames = new HashSet<>();
-
     public static void loadMapInv(long time) {
-
-        BedwarsRel bedwarsRel = BedwarsRel.getInstance();
-        GameManager gameManager = bedwarsRel.getGameManager();
 
         new BukkitRunnable() {
             @Override
             public void run() {
+
+                BedwarsRel bedwarsRel = BedwarsRel.getInstance();
+                GameManager gameManager = bedwarsRel.getGameManager();
 
                 if (mapInv == null) {
                     mapInv = Bukkit.getServer().createInventory(null, menuRow * 9, menuTitle);

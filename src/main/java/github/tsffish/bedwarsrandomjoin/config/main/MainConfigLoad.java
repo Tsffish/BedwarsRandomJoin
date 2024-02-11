@@ -1,14 +1,16 @@
 package github.tsffish.bedwarsrandomjoin.config.main;
 
+import github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin;
 import github.tsffish.bedwarsrandomjoin.listener.PlayerClickHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import static github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin.plugin;
-import static github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin.pluginName;
+import static github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin.checkUpdate;
 import static github.tsffish.bedwarsrandomjoin.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarsrandomjoin.config.misc.ErrorConfigHandler.er;
 import static github.tsffish.bedwarsrandomjoin.util.MapInv.loadMapInv;
@@ -17,24 +19,23 @@ import static github.tsffish.bedwarsrandomjoin.util.misc.MessSender.l;
 import static github.tsffish.bedwarsrandomjoin.util.misc.MessSender.le;
 
 public class MainConfigLoad{
+    private static final Plugin plugin = JavaPlugin.getPlugin(BedwarsRandomJoin.class);
     private static final String name = "MainConfigLoad";
     private static final String reason = "vaule is null";
     public static void loadMainConfig(CommandSender executer, boolean firstload) {
 
-        Bukkit.getPluginManager().getPlugin(pluginName).saveDefaultConfig();
-
-
-            c = Bukkit.getPluginManager().getPlugin(pluginName).getConfig();
+        plugin.saveDefaultConfig();
+        c = plugin.getConfig();
 
         if (c == null) {
             le("MainConfigLoad","Unable to find configuration file");
             if (executer != null)
             {
-            executer.sendMessage("Unable to find configuration file");
+                executer.sendMessage("Unable to find configuration file");
             }
         } else {
 
-            Bukkit.getPluginManager().getPlugin(pluginName).reloadConfig();
+            plugin.reloadConfig();
 
             if (c.getString(MainConfigPath.path_messreloadnow) != null) {
                 messreloadnow = c.getString(MainConfigPath.path_messreloadnow);
@@ -53,6 +54,18 @@ public class MainConfigLoad{
             if (!firstload) {
                 if (executer != null) {
                     executer.sendMessage(t(messreloadnow));
+                }
+            }
+
+            if (firstload){
+                if (c.getString(MainConfigPath.path_update_checker) != null) {
+                    boolean update_checker = c.getBoolean(MainConfigPath.path_update_checker);
+                    if (update_checker) {
+                        checkUpdate(105616);
+                    }
+                } else {
+                    er(name, MainConfigPath.path_update_checker, reason);
+                    checkUpdate(105616);
                 }
             }
 
@@ -103,7 +116,6 @@ public class MainConfigLoad{
                     executer.sendMessage(t(messreloadsucc));
                 }
             }else {
-
                 PluginManager pm = Bukkit.getPluginManager();
 
                 pm.registerEvents(new PlayerClickHandler(), plugin);

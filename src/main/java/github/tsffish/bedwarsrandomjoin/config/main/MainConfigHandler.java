@@ -13,5 +13,5 @@ public class MainConfigHandler {
     public static Material gameStopItemType;
     public static String menuTitle;
     public static int menuRow;
-
+    public static boolean update_checker;
 }

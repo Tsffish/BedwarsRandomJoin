@@ -16,9 +16,8 @@ import org.bukkit.plugin.PluginManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import static github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin.pluginName;
+import static github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin.*;
 
 public class CommandInfo implements CommandExecutor {
 
@@ -36,7 +35,7 @@ public class CommandInfo implements CommandExecutor {
                         openMapInv(sender, args);
                         return true;
                     } else if (args[0].equalsIgnoreCase("join")) {
-                        joinRandomGame(sender);
+                        joinRandomGame(sender,args);
                         return true;
                     }
                 }
@@ -50,7 +49,7 @@ public class CommandInfo implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("open")) {
                     openMapInv(sender, args);
                 } else if (args[0].equalsIgnoreCase("join")) {
-                    joinRandomGame(sender);
+                    joinRandomGame(sender,args);
                 } else {
                     // 未知的命令，显示帮助信息
                     showHelpMess(sender);
@@ -89,9 +88,19 @@ public class CommandInfo implements CommandExecutor {
 
 
 
-    private void joinRandomGame(CommandSender sender) {
+    private void joinRandomGame(CommandSender sender, String[] args) {
         if (sender instanceof Player) {
-            Player targetPlayer = (Player) sender;
+            Player targetPlayer;
+            if (args.length < 2) {
+                targetPlayer = (Player) sender;
+            } else {
+                if (Bukkit.getPlayer(args[1]) != null) {
+                    targetPlayer = Bukkit.getPlayer(args[1]);
+                } else {
+                    sender.sendMessage(ChatColor.RED + "Player not found or not online.");
+                    return;
+                }
+            }
 
             GameManager gm = BedwarsRel.getInstance().getGameManager();
             List<Game> gameList = new ArrayList<>();
@@ -106,16 +115,22 @@ public class CommandInfo implements CommandExecutor {
                 return;
             }
 
-            if (gm.getGameOfPlayer(targetPlayer) != null && gm.getGameOfPlayer(targetPlayer).getPlayers().contains(targetPlayer)) {
-                gm.getGameOfPlayer(targetPlayer).playerLeave(targetPlayer, true);
+            Game selectedGame = null;
+            int maxPlayers = 0;
+            for (Game game : gameList) {
+                if (selectedGame == null || game.getPlayers().size() < maxPlayers && game.getPlayers().size() != game.getMaxPlayers()) {
+                    selectedGame = game;
+                    maxPlayers = game.getPlayers().size();
+                }
             }
 
-            Random random = new Random();
-            int randomIndex = random.nextInt(gameList.size());
-            Game randomGame = gameList.get(randomIndex);
-            gm.addGamePlayer(targetPlayer, randomGame);
-            randomGame.playerJoins(targetPlayer);
-            targetPlayer.teleport(randomGame.getLobby());
+            if (gm.getGameOfPlayer(targetPlayer).getPlayers().contains(targetPlayer)){
+                gm.getGameOfPlayer(targetPlayer).playerLeave(targetPlayer, false);
+            }
+
+            gm.addGamePlayer(targetPlayer, selectedGame);
+            selectedGame.playerJoins(targetPlayer);
+            targetPlayer.teleport(selectedGame.getLobby());
         } else {
             sender.sendMessage(ChatColor.RED + "This command can only be executed by players.");
         }
@@ -138,9 +153,9 @@ public class CommandInfo implements CommandExecutor {
     private static void showPluginInfo(CommandSender sender) {
         sender.sendMessage(ChatColor.GREEN + " ================================");
         sender.sendMessage(" ");
-        sender.sendMessage(ChatColor.WHITE + pluginName + " " + ChatColor.AQUA + pluginName);
+        sender.sendMessage(ChatColor.WHITE + pluginName + " " + ChatColor.AQUA + pluginVersion);
         sender.sendMessage(" ");
-        sender.sendMessage(ChatColor.WHITE + "Author: " + ChatColor.YELLOW + "Tsffish");
+        sender.sendMessage(ChatColor.WHITE + "Author: " + ChatColor.YELLOW + author);
         sender.sendMessage(" ");
         sender.sendMessage(ChatColor.GREEN + " ================================");
     }
@@ -151,8 +166,8 @@ public class CommandInfo implements CommandExecutor {
         sender.sendMessage(" ");
         sender.sendMessage(" " + ChatColor.WHITE + "/bwrj" + ChatColor.YELLOW + " Display this help information.");
         sender.sendMessage(" " + ChatColor.WHITE + "/bwrj reload" + ChatColor.YELLOW + " Reload configuration file.");
-        sender.sendMessage(" " + ChatColor.WHITE + "/bwrj open {player}" + ChatColor.YELLOW + " Open menu for a specific player. If no player is specified, open menu for yourself.");
-        sender.sendMessage(" " + ChatColor.WHITE + "/bwrj join {player}" + ChatColor.YELLOW + " RandomJoin for a specific player. If no player is specified, open menu for yourself.");
+        sender.sendMessage(" " + ChatColor.WHITE + "/bwrj open {player}" + ChatColor.YELLOW + " Open menu for a specific player or open menu for you.");
+        sender.sendMessage(" " + ChatColor.WHITE + "/bwrj join {player}" + ChatColor.YELLOW + " RandomJoin for a specific player or randomjoin for you.");
         sender.sendMessage(" ");
     }
 }

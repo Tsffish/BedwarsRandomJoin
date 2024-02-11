@@ -11,3 +11,5 @@ gameFullItemType: "REDSTONE_BLOCK"
 gameStopItemType: "REDSTONE_BLOCK"
 menuTitle: "Select Game"
 menuRow: 6
+
+update_checker: true

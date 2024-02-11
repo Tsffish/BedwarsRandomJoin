@@ -9,5 +9,6 @@ public class MainConfigPath {
     static String path_gameStopItemType =  "gameStopItemType";
     static String path_menuTitle = "menuTitle";
     static String path_menuRow = "menuRow";
+    static String path_update_checker = "update_checker";
 
 }
