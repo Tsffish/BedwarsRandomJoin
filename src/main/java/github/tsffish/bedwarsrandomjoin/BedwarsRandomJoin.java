@@ -16,7 +16,7 @@ import static github.tsffish.bedwarsrandomjoin.util.misc.MessSender.l;
 
 public class BedwarsRandomJoin extends JavaPlugin {
     public static final String pluginName = "BedwarsRandomJoin";
-    public static final String pluginVersion = "1.0.1";
+    public static final String pluginVersion = "1.0.2";
     public static final String pluginNameConsole = "[BedwarsRandomJoin]";
     public static final String author = "Tsffish";
     public static PluginManager pluginManager = Bukkit.getPluginManager();
@@ -67,9 +67,9 @@ public class BedwarsRandomJoin extends JavaPlugin {
     }
     public static void checkUpdate(int resId)
     {
-        new UpdateChecker(JavaPlugin.getPlugin(BedwarsRandomJoin.class), resId).getVersion(version ->
+        new UpdateChecker(JavaPlugin.getProvidingPlugin(BedwarsRandomJoin.class), resId).getVersion(version ->
         {
-            if (JavaPlugin.getPlugin(BedwarsRandomJoin.class).getDescription().getVersion().equals(version))
+            if (Bukkit.getPluginManager().getPlugin("BedwarsRandomJoin").getDescription().getVersion().equals(version))
             {
                 isLastestVersion = true;
             } else

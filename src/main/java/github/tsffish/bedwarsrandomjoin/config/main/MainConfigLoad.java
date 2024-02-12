@@ -61,11 +61,11 @@ public class MainConfigLoad{
                 if (c.getString(MainConfigPath.path_update_checker) != null) {
                     boolean update_checker = c.getBoolean(MainConfigPath.path_update_checker);
                     if (update_checker) {
-                        checkUpdate(105616);
+                        checkUpdate(115020);
                     }
                 } else {
                     er(name, MainConfigPath.path_update_checker, reason);
-                    checkUpdate(105616);
+                    checkUpdate(115020);
                 }
             }
 

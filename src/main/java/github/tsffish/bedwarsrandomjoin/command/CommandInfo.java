@@ -132,7 +132,49 @@ public class CommandInfo implements CommandExecutor {
             selectedGame.playerJoins(targetPlayer);
             targetPlayer.teleport(selectedGame.getLobby());
         } else {
-            sender.sendMessage(ChatColor.RED + "This command can only be executed by players.");
+
+            Player targetPlayer;
+            if (args.length < 2) {
+                sender.sendMessage(ChatColor.RED + "This command can only be executed by players.");
+                return;
+            } else {
+                if (Bukkit.getPlayer(args[1]) != null) {
+                    targetPlayer = Bukkit.getPlayer(args[1]);
+                } else {
+                    sender.sendMessage(ChatColor.RED + "Player not found or not online.");
+                    return;
+                }
+            }
+
+            GameManager gm = BedwarsRel.getInstance().getGameManager();
+            List<Game> gameList = new ArrayList<>();
+            for (Game game : gm.getGames()) {
+                if (game.getState() == GameState.WAITING) {
+                    gameList.add(game);
+                }
+            }
+
+            if (gameList.isEmpty()) {
+                targetPlayer.sendMessage(ChatColor.RED + "There are no available games to join.");
+                return;
+            }
+
+            Game selectedGame = null;
+            int maxPlayers = 0;
+            for (Game game : gameList) {
+                if (selectedGame == null || game.getPlayers().size() < maxPlayers && game.getPlayers().size() != game.getMaxPlayers()) {
+                    selectedGame = game;
+                    maxPlayers = game.getPlayers().size();
+                }
+            }
+
+            if (gm.getGameOfPlayer(targetPlayer).getPlayers().contains(targetPlayer)){
+                gm.getGameOfPlayer(targetPlayer).playerLeave(targetPlayer, false);
+            }
+
+            gm.addGamePlayer(targetPlayer, selectedGame);
+            selectedGame.playerJoins(targetPlayer);
+            targetPlayer.teleport(selectedGame.getLobby());
         }
     }
 
