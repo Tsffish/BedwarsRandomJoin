@@ -13,11 +13,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import static github.tsffish.bedwarsrandomjoin.config.main.MainConfigHandler.*;
-
-public class PlayerClickHandler implements Listener
+/**
+ * A Addon for BedwarsRel, allow you to randomly join a game or choose any game in menu
+ * github.com/Tsffish/BedwarsRandomJoin
+ *
+ * @author Tsffish
+ */
+public class PlayerClick implements Listener
 {
     @EventHandler
-    public void on(InventoryClickEvent event) {
+    public void on(final InventoryClickEvent event) {
         if (event.getWhoClicked() instanceof Player){
 
         Player player = (Player) event.getWhoClicked();

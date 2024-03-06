@@ -1,18 +1,37 @@
 name: BedwarsRandomJoin
-version: 1.0.2
+version: 1.0.3
 main: github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin
-author: tsffish
+author: Tsffish
+depend:
+  - BedwarsRel
 api-version: 1.13
+permissions:
+  bwrj.base:
+    description: Hello Permission
+    default: true
+  bwrj.open:
+    description: Open Permission
+    default: op
+  bwrj.join:
+    description: Join Permission
+    default: op
+  bwrj.reload:
+    description: Relod Permission
+    default: op
 commands:
   bwrj:
     description: Hello Command
     usage: /bwrj
+    permission: bwrj.base
   bwrj open:
     description: Open Command
     usage: /bwrj open
+    permission: bwrj.open
   bwrj join:
     description: Join Command
     usage: /bwrj join
+    permission: bwrj.join
   bwrj reload:
     description: Reload Command
     usage: /bwrj reload
+    permission: bwrj.reload

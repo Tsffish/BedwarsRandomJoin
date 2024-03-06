@@ -1,5 +1,10 @@
 package github.tsffish.bedwarsrandomjoin.config.main;
-
+/**
+ * A Addon for BedwarsRel, allow you to randomly join a game or choose any game in menu
+ * github.com/Tsffish/BedwarsRandomJoin
+ *
+ * @author Tsffish
+ */
 public class MainConfigPath {
     public static String path_messreloadnow = "messreloadnow";
     public static String path_messreloadsucc = "messreloadsucc";

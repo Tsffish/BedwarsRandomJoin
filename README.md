@@ -14,9 +14,14 @@ Functions:
 - /bwrj open {player} --> Open menu for a specific player or open for you.
 - /bwrj join {player} --> RandomJoin for a specific player or randomjoin for you.
 
+## Permissions:
+- /bwrj.base          --> Use /bwrj.
+- /bwrj.reload        --> Use /bwrj reload.
+- /bwrj.open          --> Use /bwrj open.
+- /bwrj.join          --> Use /bwrj join.
+
 ## Usage:
-1. Place the plugin in the plugins folder on the server
-
-2. Restart the server
-
+1. Stop your server
+1. Place the .jar file to the plugins folder on the server
+2. Start your server
 3. The plugin is now enabled, and you can use/bwrj to view help

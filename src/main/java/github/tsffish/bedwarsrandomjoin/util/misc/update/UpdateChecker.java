@@ -1,4 +1,4 @@
-package github.tsffish.bedwarsrandomjoin.util.update;
+package github.tsffish.bedwarsrandomjoin.util.misc.update;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
+import static github.tsffish.bedwarsrandomjoin.util.misc.MessSender.le;
+
 /**
  * A Addon for BedwarsRel, allow you to randomly join a game or choose any game in menu
  * github.com/Tsffish/BedwarsRandomJoin
@@ -16,10 +18,9 @@ import java.util.function.Consumer;
  * @author Tsffish
  */
 public class UpdateChecker {
-
+    private static final String className = "UpdateChecker";
     private final JavaPlugin plugin;
     private final int resourceId;
-
     public UpdateChecker(JavaPlugin plugin, int resourceId) {
         this.plugin = plugin;
         this.resourceId = resourceId;
@@ -32,7 +33,7 @@ public class UpdateChecker {
                     consumer.accept(scann.next());
                 }
             } catch (IOException e) {
-                plugin.getLogger().info("Unable to check for updates: " + e.getMessage());
+                le(className,"Unable to check for updates: " + e.getMessage());
             }
         });
     }

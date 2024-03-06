@@ -1,0 +1,24 @@
+# ====================== #
+# BedwarsRandomJoin Lang Config #
+# ====================== #
+
+update_tip:
+  - "&a ================================"
+  - "&f "
+  - "&f BedwarsRandomJoin &bFound a new version!"
+  - "&f "
+  - "&f You can download here: https://www.spigotmc.org/resources/bedwarsrandomjoin.115020/"
+  - "&f If you don't want to check for updates, please turn off the update_checker in config"
+  - "&f "
+  - "&a ================================"
+command_help:
+  - "&a ================================"
+  - "&f "
+  - "&f BedwarsRandomJoin &bCommands:"
+  - "&f "
+  - "&f/bwrj &eDisplay this help information."
+  - "&f/bwrj reload &eReload configuration file."
+  - "&f/bwrj open {player} &eOpen menu for a specific player or open menu for you."
+  - "&f/bwrj join {player} &eRandomJoin for a specific player or randomjoin for you."
+  - "&f "
+  - "&a ================================"

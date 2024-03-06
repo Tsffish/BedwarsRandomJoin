@@ -18,7 +18,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static github.tsffish.bedwarsrandomjoin.config.main.MainConfigHandler.*;
-
+/**
+ * A Addon for BedwarsRel, allow you to randomly join a game or choose any game in menu
+ * github.com/Tsffish/BedwarsRandomJoin
+ *
+ * @author Tsffish
+ */
 public class MapInv {
     private static final Plugin plugin = JavaPlugin.getPlugin(BedwarsRandomJoin.class);
     private static Inventory mapInv;
@@ -40,12 +45,12 @@ public class MapInv {
 
                 addedGames.clear();
 
-                for (Game list : gameManager.getGames()) {
-                    if (list != null) {
-                        int current = list.getPlayers().size();
-                        String gameName = list.getName();
-                        if (list.getState() == GameState.WAITING) {
-                            if (current < list.getMaxPlayers()) {
+                for (Game game : gameManager.getGames()) {
+                    if (game != null) {
+                        int current = game.getPlayers().size();
+                        String gameName = game.getName();
+                        if (game.getState() == GameState.WAITING) {
+                            if (current < game.getMaxPlayers()) {
                                 if (!addedGames.contains(gameName)) {
                                     ItemStack i1 = new ItemStack(gameCanJoinItemType, current);
                                     ItemMeta i1s = i1.getItemMeta();
@@ -54,7 +59,7 @@ public class MapInv {
                                     mapInv.addItem(i1);
                                     addedGames.add(gameName);
                                 }
-                            } else if (list.isFull() && !addedGames.contains(gameName)) {
+                            } else if (game.isFull() && !addedGames.contains(gameName)) {
                                 ItemStack i2 = new ItemStack(gameFullItemType, 1);
                                 ItemMeta i2s = i2.getItemMeta();
                                 i2s.setDisplayName(gameName);
@@ -63,14 +68,14 @@ public class MapInv {
                                 addedGames.add(gameName);
                             }
 
-                        } else if (list.getState() == GameState.STOPPED && !addedGames.contains(gameName)) {
+                        } else if (game.getState() == GameState.STOPPED && !addedGames.contains(gameName)) {
                             ItemStack i3 = new ItemStack(gameStopItemType, 1);
                             ItemMeta i3s = i3.getItemMeta();
                             i3s.setDisplayName(gameName);
                             i3.setItemMeta(i3s);
                             mapInv.addItem(i3);
                             addedGames.add(gameName);
-                        } else if (list.getState() == GameState.RUNNING && !addedGames.contains(gameName)) {
+                        } else if (game.getState() == GameState.RUNNING && !addedGames.contains(gameName)) {
                             ItemStack i4 = new ItemStack(gameRuningItemType, 1);
                             ItemMeta i4s = i4.getItemMeta();
                             i4s.setDisplayName(gameName);
