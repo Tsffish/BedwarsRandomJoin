@@ -9,6 +9,14 @@ A Addon for BedwarsRel, allow you to randomly join a game or choose any game in 
 - Randomly join a game, Prioritize joining games with a larger number of players
 - Choose any game In Menu
 
+## Download
+You can download the latest version [here](https://www.spigotmc.org/resources/bedwarsrandomjoin.115020/)
+
+## Installation:
+- 1.Stop your server
+- 2.Place the plugin jar file in the plugins folder of the root directory
+- 4.The plugin is enabled, and you can use/bwrj to view command help
+
 ## Commands:
 - /bwrj				  --> Display this help information.
 - /bwrj reload 		  --> Reload configuration file.
@@ -20,9 +28,3 @@ A Addon for BedwarsRel, allow you to randomly join a game or choose any game in 
 - /bwrj.reload        --> Use /bwrj reload.
 - /bwrj.open          --> Use /bwrj open.
 - /bwrj.join          --> Use /bwrj join.
-
-## Usage:
-1. Stop your server
-1. Place the .jar file to the plugins folder on the server
-2. Start your server
-3. The plugin is now enabled, and you can use/bwrj to view help
