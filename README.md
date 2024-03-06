@@ -1,8 +1,9 @@
-# BedwarsRandomJoin
+# Introduction
 
 A Addon for BedwarsRel, allow you to randomly join a game or choose any game in menu
 
-Depend: BedwarsRel
+### Depend: 
+- BedwarsRel
 
 Functions:
 - Randomly join a game, Prioritize joining games with a larger number of players
