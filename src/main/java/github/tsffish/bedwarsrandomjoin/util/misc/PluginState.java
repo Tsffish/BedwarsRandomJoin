@@ -9,7 +9,7 @@ import static github.tsffish.bedwarsrandomjoin.util.misc.StringMgr.pluginName;
  * @author Tsffish
  */
 public class PluginState {
-    private static final String pluginVersion = "1.0.3";
+    private static final String pluginVersion = "1.0.4";
     public static String pluginVersion(){
         return pluginVersion;
     }

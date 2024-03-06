@@ -1,5 +1,5 @@
 name: BedwarsRandomJoin
-version: 1.0.3
+version: 1.0.4
 main: github.tsffish.bedwarsrandomjoin.BedwarsRandomJoin
 author: Tsffish
 depend:

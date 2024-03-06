@@ -108,11 +108,17 @@ public class CommandInfo implements CommandExecutor {
             }
 
             GameManager gm = BedwarsRel.getInstance().getGameManager();
+
             List<Game> gameList = new ArrayList<>();
+
             for (Game game : gm.getGames()) {
                 if (game.getState() == GameState.WAITING) {
                     gameList.add(game);
                 }
+            }
+
+            if (gm.getGameOfPlayer(targetPlayer) != null){
+                gameList.remove(gm.getGameOfPlayer(targetPlayer));
             }
 
             if (gameList.isEmpty()) {
@@ -122,18 +128,18 @@ public class CommandInfo implements CommandExecutor {
 
             Game selectedGame = null;
             int maxPlayers = 0;
+
             for (Game game : gameList) {
-                if (selectedGame == null || game.getPlayers().size() < maxPlayers && game.getPlayers().size() != game.getMaxPlayers()) {
+                if (selectedGame == null || game.getPlayers().size() > maxPlayers) {
                     selectedGame = game;
                     maxPlayers = game.getPlayers().size();
                 }
             }
 
-            if (gm.getGameOfPlayer(targetPlayer).getPlayers().contains(targetPlayer)){
+            if (gm.getGameOfPlayer(targetPlayer) != null){
                 gm.getGameOfPlayer(targetPlayer).playerLeave(targetPlayer, false);
             }
 
-            gm.addGamePlayer(targetPlayer, selectedGame);
             selectedGame.playerJoins(targetPlayer);
             targetPlayer.teleport(selectedGame.getLobby());
         } else {
@@ -152,11 +158,17 @@ public class CommandInfo implements CommandExecutor {
             }
 
             GameManager gm = BedwarsRel.getInstance().getGameManager();
+
             List<Game> gameList = new ArrayList<>();
+
             for (Game game : gm.getGames()) {
                 if (game.getState() == GameState.WAITING) {
                     gameList.add(game);
                 }
+            }
+
+            if (gm.getGameOfPlayer(targetPlayer) != null){
+                gameList.remove(gm.getGameOfPlayer(targetPlayer));
             }
 
             if (gameList.isEmpty()) {
@@ -166,21 +178,20 @@ public class CommandInfo implements CommandExecutor {
 
             Game selectedGame = null;
             int maxPlayers = 0;
+
             for (Game game : gameList) {
-                if (selectedGame == null || game.getPlayers().size() < maxPlayers && game.getPlayers().size() != game.getMaxPlayers()) {
+                if (selectedGame == null || game.getPlayers().size() > maxPlayers) {
                     selectedGame = game;
                     maxPlayers = game.getPlayers().size();
                 }
             }
 
-            if (gm.getGameOfPlayer(targetPlayer) != null) {
-                if (gm.getGameOfPlayer(targetPlayer).getPlayers().contains(targetPlayer)) {
-                    gm.getGameOfPlayer(targetPlayer).playerLeave(targetPlayer, false);
-                }
+            if (gm.getGameOfPlayer(targetPlayer) != null){
+                gm.getGameOfPlayer(targetPlayer).playerLeave(targetPlayer, false);
             }
-            gm.addGamePlayer(targetPlayer, selectedGame);
-            selectedGame.playerJoins(targetPlayer);
-            targetPlayer.teleport(selectedGame.getLobby());
+
+                selectedGame.playerJoins(targetPlayer);
+                targetPlayer.teleport(selectedGame.getLobby());
         }
     }
 
